@@ -1,10 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QMessageBox, QPlainTextEdit, QPushButton
 import sys
-import os
 import steganography
-from PIL import Image
-
 
 class Window(QMainWindow):
 
