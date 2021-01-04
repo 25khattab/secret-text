@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPlainTextEdit, QPushButton
-import sys
+import sys ,os
 import steganography
 
 class Window(QMainWindow):
@@ -25,7 +25,7 @@ class Window(QMainWindow):
 
     def encode(self):
         image = QtWidgets.QFileDialog.getOpenFileName(
-            self, 'Select Image to encode', "Image Files (*.jpg *.gif *.bmp *.png)")
+            self, 'Select Image to encode', os.getcwd(),"Image Files (*.jpg *.gif *.bmp *.png)")
         data = self.text_box.toPlainText()
         newImg = QtWidgets.QFileDialog.getSaveFileName(
             self, 'Save the picture')
@@ -33,7 +33,7 @@ class Window(QMainWindow):
 
     def decode(self):
         image = QtWidgets.QFileDialog.getOpenFileName(
-            self, 'Select Image to decode', "Image Files (*.jpg *.gif *.bmp *.png)")
+            self, 'Select Image to decode', os.getcwd(),"Image Files (*.jpg *.gif *.bmp *.png)")
         text = steganography.decode(image[0])
         self.text_box.setPlainText(text)
 
