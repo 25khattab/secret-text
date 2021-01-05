@@ -64,8 +64,7 @@ def encode_enc(newimg, data):
 def encode(img, data,new_img_name):
     image = Image.open(img, 'r')
     if (len(data) == 0):
-        raise ValueError('Data is empty')
-    
+        return 
     newimg = image.copy()
     encode_enc(newimg, data)
     newimg.save(new_img_name)

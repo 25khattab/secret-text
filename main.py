@@ -1,7 +1,8 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPlainTextEdit, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPlainTextEdit, QPushButton, QMessageBox
 import sys ,os
 import steganography
+import string
 
 class Window(QMainWindow):
 
@@ -24,18 +25,32 @@ class Window(QMainWindow):
         self.text_box.setGeometry(0, 70, 600, 300)
 
     def encode(self):
-        image = QtWidgets.QFileDialog.getOpenFileName(
-            self, 'Select Image to encode', os.getcwd(),"Image Files (*.jpg *.gif *.bmp *.png)")
-        data = self.text_box.toPlainText()
-        newImg = QtWidgets.QFileDialog.getSaveFileName(
-            self, 'Save the picture')
-        steganography.encode(image[0], data, newImg[0])
+        
+            data = self.text_box.toPlainText()
+            if (len(data) == 0):
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("Error")
+                msg.setInformativeText('Please Enter Value to Encode')
+                msg.setWindowTitle("Error")
+                msg.exec_()
+            else:
+                    image = QtWidgets.QFileDialog.getOpenFileName(
+                    self, 'Select Image to encode', os.getcwd(),"Image Files (*.jpg *.gif *.bmp *.png)")
+                    if not (image[0] == ""):        
+                        newImg = QtWidgets.QFileDialog.getSaveFileName(
+                        self, 'Save the picture')
+                        steganography.encode(image[0], data, newImg[0])
+                           
+                        
 
+                   
     def decode(self):
         image = QtWidgets.QFileDialog.getOpenFileName(
             self, 'Select Image to decode', os.getcwd(),"Image Files (*.jpg *.gif *.bmp *.png)")
-        text = steganography.decode(image[0])
-        self.text_box.setPlainText(text)
+        if not (image[0] == ""):   
+            text = steganography.decode(image[0])
+            self.text_box.setPlainText(text)
 
 
 if __name__ == "__main__":
