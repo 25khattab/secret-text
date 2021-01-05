@@ -17,7 +17,7 @@ git clone https://github.com/25khattab/secret-text
 ```
 to run the project use :
 ```bash
-cd text-classifier
+cd secret-text
 python main.py
 ```
 
